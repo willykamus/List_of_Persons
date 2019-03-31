@@ -1,8 +1,6 @@
 package model;
 
-import java.util.List;
-
-public abstract class Person {
+public abstract class Person implements Information {
 
     protected String name;
     protected int age;
@@ -27,9 +25,6 @@ public abstract class Person {
     public void setAge(int age) {
         this.age = age;
     }
-
-    public abstract List<String> displayInformation();
-
 
     @Override
     public String toString() {

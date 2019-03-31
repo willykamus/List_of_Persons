@@ -82,6 +82,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+        Person selectedPerson = (Person) parent.getItemAtPosition(position);
+
+        for (int i = 0; i < selectedPerson.displayInformation().size(); i++) {
+
+            String str = selectedPerson.displayInformation().get(i);
+            textViews.get(i).setText("");
+            textViews.get(i).setText(str);
+
+        }
+
     }
 
     @Override
