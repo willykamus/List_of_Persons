@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">List_Persons</string>
+
+    <string-array name="List_options">
+
+        <item>Students</item>
+        <item>Employees</item>
+        <item>All</item>
+
+    </string-array>
 </resources>
