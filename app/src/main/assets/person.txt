@@ -1,0 +1,11 @@
+E,David,25,1234,Programmer,1520.5
+S,Maria,18,4001,DEC
+S,Carla,20,4002,Mobile
+E,Ivette,30,1235,Administration,2000.99
+S,Gabriel,35,4003,Cooking
+S,Carlos,33,4004,Fashion
+S,Daniel,29,4005,Business
+E,Pedro,45,1235,Coordinator,3000.55
+E,Juan,60,1236,Teacher,2790.0
+E,Ismael,55,1237,Administration,1700.55
+

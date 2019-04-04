@@ -10,8 +10,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import model.Employee;
+import model.FileManager;
 import model.Person;
 import model.Student;
 
@@ -22,9 +25,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ArrayList<TextView> textViews = new ArrayList<>();
     ArrayAdapter<CharSequence> spinner_adapter;
     ArrayAdapter<Person> list_adapter;
-    ArrayList<Person> listStudents = new ArrayList<>();
-    ArrayList<Person> listEmployees = new ArrayList<>();
+    ArrayList<Person> listStudents;
+    ArrayList<Person> listEmployees;
     ListView listView;
+    TextView textView_Title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         initializeData();
 
+        textView_Title = findViewById(R.id.textView_Title);
 
         spinner_adapter = ArrayAdapter.createFromResource(this, R.array.List_options, android.R.layout.simple_spinner_dropdown_item);
         spinner = findViewById(R.id.spinner);
@@ -59,23 +64,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void initializeData() {
 
-        Person newStudent = new Student("William", 34, 101, "Mobile");
-        listStudents.add(newStudent);
+        listStudents = FileManager.readStudentsFromFile(this,"person.txt");
+        listEmployees = FileManager.readEmployeesFromFile(this,"person.txt");
 
-        newStudent = new Student("Ivette", 33, 102, "Business");
-        listStudents.add(newStudent);
-
-        newStudent = new Student("Tata", 25, 103, "Cooking");
-        listStudents.add(newStudent);
-
-        Person newEmployee = new Employee("Mir", 25, 1001, "Teacher", 10000.0);
-        listEmployees.add(newEmployee);
-
-        newEmployee = new Employee("Ramiro", 55, 1002, "Teacher", 15000.0);
-        listEmployees.add(newEmployee);
-
-        newEmployee = new Employee("Carlos", 45, 1003, "Administator", 8000.0);
-        listEmployees.add(newEmployee);
+//        Person newStudent = new Student("William", 34, 101, "Mobile");
+//        listStudents.add(newStudent);
+//
+//        newStudent = new Student("Ivette", 33, 102, "Business");
+//        listStudents.add(newStudent);
+//
+//        newStudent = new Student("Tata", 25, 103, "Cooking");
+//        listStudents.add(newStudent);
+//
+//        Person newEmployee = new Employee("Mir", 25, 1001, "Teacher", 10000.0);
+//        listEmployees.add(newEmployee);
+//
+//        newEmployee = new Employee("Ramiro", 55, 1002, "Teacher", 15000.0);
+//        listEmployees.add(newEmployee);
+//
+//        newEmployee = new Employee("Carlos", 45, 1003, "Administator", 8000.0);
+//        listEmployees.add(newEmployee);
 
     }
 
@@ -84,10 +92,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         Person selectedPerson = (Person) parent.getItemAtPosition(position);
 
+        for (int i = 0; i < textViews.size(); i++){
+            textViews.get(i).setText("");
+        }
+
         for (int i = 0; i < selectedPerson.displayInformation().size(); i++) {
 
             String str = selectedPerson.displayInformation().get(i);
-            textViews.get(i).setText("");
             textViews.get(i).setText(str);
 
         }
@@ -104,14 +115,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             case "students":
                 list_adapter.addAll(listStudents);
+                textView_Title.setText("List of Students");
                 break;
 
             case "employees":
                 list_adapter.addAll(listEmployees);
+                textView_Title.setText("List of Employees");
                 break;
             case "all":
                 list_adapter.addAll(listStudents);
                 list_adapter.addAll(listEmployees);
+                textView_Title.setText("List of Persons");
                 break;
         }
 

@@ -1,6 +1,8 @@
 package model;
 
-public abstract class Person implements Information {
+import java.util.List;
+
+public abstract class Person {
 
     protected String name;
     protected int age;
@@ -30,4 +32,6 @@ public abstract class Person implements Information {
     public String toString() {
         return getName();
     }
+
+    public abstract List<String> displayInformation();
 }
